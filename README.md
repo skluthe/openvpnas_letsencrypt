@@ -35,8 +35,11 @@ handler.serve_forever()
 ```
 ### Create a crontab that will stop OpenVPN Access and the Python Script and generate a new cert
 ```
+git clone https://github.com/skluthe/openvpnas_letsencrypt.git
+chmod +x renew.sh
+sudo mkdir -p /opt/renew && cp renew.sh /opt/renew/renew.sh
 sudo nano /etc/cron.d/certbot
 ```
 ```
-0 */12 * * * root test -x /usr/bin/certbot -q renew --pre-hook 'sudo systemctl stop openvpnas && kill$(pgrep -f 'python /usr/local/openvpn_as/port80redirect.py')' --post-hook 'sudo systemctl start openvpnas && /usr/bin/screen -dmS port80redirect /usr/bin/python /usr/local/openvpn_as/port80redirect.py'
+0 */12 * * * root test -x /opt/renew.sh
 ```
