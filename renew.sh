@@ -2,7 +2,7 @@
 #Stop OpenVPN Access Server
 systemctl stop openvpnas 
 #Kill HTTP Redirection (Optional)
-kill$(pgrep -f 'python /usr/local/openvpn_as/port80redirect.py')'
+kill $(pgrep -f 'python /usr/local/openvpn_as/port80redirect.py')'
 #Renew the local certificates
 certbot -q renew 
 #Start OpenVPN Access Server Again
